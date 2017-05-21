@@ -1,0 +1,41 @@
+library(googleAnalyticsR)
+library(ggplot2)
+
+#Authorize Google Analytics R - This will open a webpage
+#You must be logged into your Google Analytics account on your web browser
+ga_auth()
+
+#Use the Google Analytics Management API to see a list of Google Analytics accounts you have access to
+my_accounts <- ga_account_list()
+View(my_accounts)
+
+#Use my_accounts to find the viewId. Make sure to replace this with your viewId.
+my_id <- your viewId
+
+#Set date variables for dynamic date range
+start_date <- "2013"
+end_date <- "yesterday"
+
+#Get the Sessions by Date in 2016
+gadata <- google_analytics(my_id,
+                           start = "2016-05-13",
+                           end = "2017-05-13",
+                           metrics = c("sessions"),
+                           dimensions = c("date"),
+                           max = 5000)
+                           
+#Sessions Query - Uses start_date and end_date
+df2 <- google_analytics_4(my_id,
+                          date_range = c(start_date, end_date),
+                          metrics = c("sessions),
+                          dimensions = c("date"))
+                          
+#Graph Sessions by date
+ggplot(data=df2, aes(x=date, y=sessions)) +
+  geom_ine(stat = "identity")
+  
+  
+  
+#One limitation that GoogleAnalyticsR has is the limited data rows that it can import to R, I have another work around for this
+which is by using another tools and not R. 
+                          
